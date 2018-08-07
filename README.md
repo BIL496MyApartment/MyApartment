@@ -1,7 +1,7 @@
 # MyApartment
 2019 SPRING - BIL 496 group project
 
-an apartment management application
+My Apartment: an apartment management application
 
 Issues:
 
