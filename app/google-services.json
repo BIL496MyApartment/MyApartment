@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "748918411412",
+    "firebase_url": "https://myapartment-2d481.firebaseio.com",
+    "project_id": "myapartment-2d481",
+    "storage_bucket": "myapartment-2d481.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:748918411412:android:bebbf4b7434f0267",
+        "android_client_info": {
+          "package_name": "com.bil495calendear.bitirmeprojesi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "748918411412-77rpe10jd87liiv1codcp246ne0iv4db.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bil495calendear.bitirmeprojesi",
+            "certificate_hash": "3af49f006c7f989689db20d0bd89faa285e7d8d5"
+          }
+        },
+        {
+          "client_id": "748918411412-eats0dnkoc1qcgodq13tgb2d6a51a1u2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6Oo2TNBqwgOPrbWTOQf6J0SkC9Pl-CTE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "748918411412-eats0dnkoc1qcgodq13tgb2d6a51a1u2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

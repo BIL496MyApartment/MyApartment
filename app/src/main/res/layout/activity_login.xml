@@ -6,12 +6,52 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 tools:context=".LoginActivity">
 
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="LOGIN EKRANI"
-    android:textSize="35sp"
-    android:layout_centerHorizontal="true"
-    android:layout_centerVertical="true"/>
+<include layout="@layout/actionbar_app"
+    android:id="@+id/actionbarLogin" />
+    <TextView
+        android:id="@+id/txtinfo1"
+        android:textColor="@android:color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/actionbarLogin"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:text="@string/login_account"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/txtEmailLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtinfo1"
+        android:hint="@string/Email"
+        android:layout_marginTop="55dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" />
+
+    <EditText
+        android:id="@+id/txtPasswordLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtEmailLogin"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" />
+
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/giris_yap"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="35dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="@color/colorPrimary"
+        android:textColor="@android:color/white"
+        />
 
 </RelativeLayout>

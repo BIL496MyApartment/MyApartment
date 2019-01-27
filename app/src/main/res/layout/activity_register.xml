@@ -6,12 +6,63 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
+    <include
+        android:id="@+id/actionbarRegister"
+        layout="@layout/actionbar_app" />
+
     <TextView
+        android:id="@+id/txtinfo1"
+        android:textColor="@android:color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="REGISTER EKRANI"
-        android:textSize="35sp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"/>
+        android:layout_below="@id/actionbarRegister"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:text="@string/create_new_account"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/txtUsernameRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtinfo1"
+        android:hint="@string/Username"
+        android:layout_marginTop="55dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" />
+
+    <EditText
+        android:id="@+id/txtEmailRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtUsernameRegister"
+        android:hint="@string/Email"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" />
+    <EditText
+        android:id="@+id/txtPasswordRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtEmailRegister"
+        android:hint="@string/password"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:inputType="textPassword"
+        />
+    
+    <Button
+        android:id="@+id/btnHesapOlustur"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/hesap_olustur"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="35dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="@color/colorPrimary"
+        android:textColor="@android:color/white"
+        />
 
 </RelativeLayout>

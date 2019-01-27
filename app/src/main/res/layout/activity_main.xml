@@ -25,7 +25,7 @@
             android:layout_height="match_parent"
             android:background="@android:color/holo_green_light"
             android:layout_weight="1.0"
-            android:text="Mesaj Kanali" />
+            android:text="My Apartment Chat" />
 
     </LinearLayout>
 

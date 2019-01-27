@@ -3,4 +3,10 @@
     <string name="kayit_ol">KAYIT OL</string>
     <string name="appName">My Apartment</string>
     <string name="giris_yap">GIRIS YAP</string>
+    <string name="create_new_account">Yeni Hesap Olustur</string>
+    <string name="Username">Kullanici Adi</string>
+    <string name="Email">Email</string>
+    <string name="password">Parola</string>
+    <string name="hesap_olustur">HESAP OLUSTUR</string>
+    <string name="login_account">Giris Yapiniz</string>
 </resources>
