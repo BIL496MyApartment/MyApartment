@@ -20,6 +20,7 @@
         <activity android:name=".LoginActivity" android:parentActivityName=".WelcomeActivity"/>
         <activity android:name=".MainActivity" />
         <activity android:name=".DiscussionActivity" android:parentActivityName=".MainActivity"/>
+        <activity android:name=".SurveyActivity" android:parentActivityName=".MainActivity"/>
         
     </application>
 
