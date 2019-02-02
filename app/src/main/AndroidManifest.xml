@@ -19,7 +19,8 @@
         <activity android:name=".RegisterActivity" android:parentActivityName=".WelcomeActivity" />
         <activity android:name=".LoginActivity" android:parentActivityName=".WelcomeActivity"/>
         <activity android:name=".MainActivity" />
-
+        <activity android:name=".DiscussionActivity" android:parentActivityName=".MainActivity"/>
+        
     </application>
 
 </manifest>
