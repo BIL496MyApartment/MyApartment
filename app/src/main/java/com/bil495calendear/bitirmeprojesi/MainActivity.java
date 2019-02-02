@@ -25,8 +25,16 @@ public class MainActivity extends AppCompatActivity {
                 
             }
         });
-    }
-    
+        
+        Button discussionButton = (Button) findViewById(R.id.button1);
+        discussionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentLogin = new Intent(MainActivity.this, DiscussionActivity.class);
+                startActivity(intentLogin);
+            }
+        });
+        
     }
 
     @Override
