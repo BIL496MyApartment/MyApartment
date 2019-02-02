@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="460dp"
+        android:layout_height="84dp"
+        android:text="Mantolama yapilsin mi ?"
+        tools:layout_editor_absoluteX="-34dp"
+        tools:layout_editor_absoluteY="80dp" />
+
+    <Button
+        android:id="@+id/yesButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="EVET"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="173dp" />
+
+    <Button
+        android:id="@+id/noButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="HAYIR"
+        tools:layout_editor_absoluteX="288dp"
+        tools:layout_editor_absoluteY="173dp" />
+</android.support.constraint.ConstraintLayout>
