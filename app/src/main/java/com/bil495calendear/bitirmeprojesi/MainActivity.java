@@ -22,7 +22,8 @@ public class MainActivity extends AppCompatActivity {
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                
+                Intent intentLogin = new Intent(MainActivity.this, SurveyActivity.class);
+                startActivity(intentLogin);
             }
         });
         
