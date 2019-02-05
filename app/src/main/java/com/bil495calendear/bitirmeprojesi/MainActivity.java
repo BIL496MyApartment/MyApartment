@@ -3,8 +3,11 @@ package com.bil495calendear.bitirmeprojesi;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.support.v7.widget.Toolbar;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -14,10 +17,16 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseUser currentUser;
     private FirebaseAuth auth;
 
+    private Toolbar mTopToolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mTopToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mTopToolbar);
+
         Button mButton = (Button) findViewById(R.id.button3);//gunceldurumlar buttoni aktiflestirme
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -26,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intentLogin);
             }
         });
-        
+
         Button discussionButton = (Button) findViewById(R.id.button1);
         discussionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intentLogin);
             }
         });
-        
+
     }
 
     @Override
@@ -50,5 +59,31 @@ public class MainActivity extends AppCompatActivity {
 
 
         super.onStart();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+
+        super.onCreateOptionsMenu(menu);
+
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+
+        if(item.getItemId() == R.id.mainLogout){
+
+            auth.signOut();
+            Intent loginIntent = new Intent (MainActivity.this , LoginActivity.class);
+            startActivity(loginIntent);
+            finish();
+
+        }
+
+        return true;
     }
 }
