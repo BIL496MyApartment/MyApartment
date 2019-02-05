@@ -45,13 +45,26 @@ tools:context=".LoginActivity">
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/txtPasswordLogin"
         android:text="@string/giris_yap"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="35dp"
+        android:layout_marginTop="100dp"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
         android:background="@color/colorPrimary"
         android:textColor="@android:color/white"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnLogin"
+        android:layout_centerHorizontal="true"
+        android:text="Forgot your password?"
+        android:layout_marginTop="15dp"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/forgot_password"
+        android:textStyle="bold"
+
         />
 
 </RelativeLayout>
