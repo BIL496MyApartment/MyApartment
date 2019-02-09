@@ -23,11 +23,9 @@ public class LoginActivity extends AppCompatActivity {
     private Toolbar actionbarLogin;
     private EditText txtEmail, txtPassword;
     private Button btnLogin;
-    private FirebaseAuth auth;
-
+    public static FirebaseAuth auth;
+    public static FirebaseUser currentUser;
     TextView forgot_password;
-
-    private FirebaseUser currentUser;
 
     public void init(){
 
@@ -35,7 +33,8 @@ public class LoginActivity extends AppCompatActivity {
         setSupportActionBar(actionbarLogin);
         getSupportActionBar().setTitle("Giris Yap");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        auth= FirebaseAuth.getInstance();
+
+        auth = FirebaseAuth.getInstance();
 
         currentUser=auth.getCurrentUser();// current user ilerde lazim olabilir
 
@@ -44,6 +43,16 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = (Button)findViewById(R.id.btnLogin);
         forgot_password = (TextView) findViewById(R.id.forgot_password);
     }
+
+    public void multipleInit(){
+        auth= FirebaseAuth.getInstance();
+
+        currentUser = auth.getCurrentUser();// current user ilerde lazim olabilir
+
+        txtEmail = (EditText)findViewById(R.id.txtEmailLogin);
+        txtPassword = (EditText)findViewById(R.id.txtPasswordLogin);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,8 +78,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private void loginUser() {
 
-        String email =  txtEmail.getText().toString();
+        final String email =  txtEmail.getText().toString();
         String password = txtPassword.getText().toString();
+
 
         if(TextUtils.isEmpty(email)){
 
@@ -86,13 +96,14 @@ public class LoginActivity extends AppCompatActivity {
 
                     if(task.isSuccessful()){
 
-                        Toast.makeText(LoginActivity.this,"Giris basarili olmustur. Hosgeldiniz!",Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this,"Giris basarili olmustur. Hosgeldiniz " + email,Toast.LENGTH_LONG).show();
+
                         Intent mainIntent= new Intent(LoginActivity.this,MainActivity.class);
                         startActivity(mainIntent);
                         //finish();
 
                     }else{
-                        Toast.makeText(LoginActivity.this,"Giris basarisiz. Lutfen e-mail ve sifrenizi dogru girdiginizden emin olun",Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this,"Giris basarisiz. Lutfen e-mail ve sifrenizi dogru girdiginizden ve internete bagli oldugunuzdan emin olunuz!",Toast.LENGTH_LONG).show();
                     }
                 }
             });

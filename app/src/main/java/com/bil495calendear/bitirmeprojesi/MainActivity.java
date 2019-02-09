@@ -15,8 +15,6 @@ import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseUser currentUser;
-    private FirebaseAuth auth;
-
     private Toolbar mTopToolbar;
 
     @Override
@@ -77,7 +75,8 @@ public class MainActivity extends AppCompatActivity {
 
         if(item.getItemId() == R.id.mainLogout){
 
-            auth.signOut();
+            LoginActivity.auth.signOut();
+                //logAct.multipleInit();
             Intent loginIntent = new Intent (MainActivity.this , LoginActivity.class);
             startActivity(loginIntent);
             finish();
