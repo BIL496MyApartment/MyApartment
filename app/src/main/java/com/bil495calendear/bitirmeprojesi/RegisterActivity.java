@@ -28,6 +28,9 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText txtUsername, txtEmail, txtPassword;
     private Button btnRegister;
     private FirebaseAuth auth;
+    private DatabaseReference refUser;
+    private FirebaseDatabase database;
+    private Users users;
 
     DatabaseReference reference;
 
@@ -42,8 +45,15 @@ public class RegisterActivity extends AppCompatActivity {
         txtEmail = (EditText) findViewById(R.id.txtEmailRegister);
         txtPassword = (EditText) findViewById(R.id.txtPasswordRegister);
         btnRegister = (Button)findViewById(R.id.btnHesapOlustur);
+        database = FirebaseDatabase.getInstance();
+        refUser = database.getReference("Users");
+        users = new Users();
+    }
 
-
+    private void updateUser(){
+        users.setUserID("2");
+        users.setUsername(txtUsername.getText().toString());
+        users.setEmail(txtEmail.getText().toString());
 
     }
 
