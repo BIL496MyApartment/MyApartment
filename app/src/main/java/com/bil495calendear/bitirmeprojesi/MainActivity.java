@@ -16,11 +16,26 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseUser currentUser;
     private Toolbar mTopToolbar;
+    private Button btnMyApartmentChat;
+
+    public void init(){
+        btnMyApartmentChat = (Button) findViewById(R.id.button2);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        init();
+        btnMyApartmentChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentMyApartmentChat = new Intent( MainActivity.this,ChatActivity.class);
+                startActivity(intentMyApartmentChat);
+                //finish();
+            }
+        });
 
         mTopToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mTopToolbar);

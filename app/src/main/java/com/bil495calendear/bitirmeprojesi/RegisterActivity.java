@@ -15,11 +15,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -28,9 +28,8 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText txtUsername, txtEmail, txtPassword;
     private Button btnRegister;
     private FirebaseAuth auth;
-    private DatabaseReference refUser;
-    private FirebaseDatabase database;
-    private Users users;
+
+    DatabaseReference reference;
 
     public void init(){
         actionbarRegister = (Toolbar) findViewById(R.id.actionbarRegister);
@@ -43,26 +42,21 @@ public class RegisterActivity extends AppCompatActivity {
         txtEmail = (EditText) findViewById(R.id.txtEmailRegister);
         txtPassword = (EditText) findViewById(R.id.txtPasswordRegister);
         btnRegister = (Button)findViewById(R.id.btnHesapOlustur);
-        database = FirebaseDatabase.getInstance();
-        refUser = database.getReference("Users");
-        users = new Users();
 
-    }
 
-    private void updateUser(){
-        users.setUserID("2");
-        users.setUsername(txtUsername.getText().toString());
-        users.setEmail(txtEmail.getText().toString());
+
     }
 
     private void createNewAccount() {
 
-        String username = txtUsername.getText().toString();
+        final String username = txtUsername.getText().toString();
         String email= txtEmail.getText().toString();
         String password = txtPassword.getText().toString();
 
         if(TextUtils.isEmpty(email)){
+
             Toast.makeText(this,"Lutfen E-mail alanini doldurun.",Toast.LENGTH_LONG).show();
+
         }else if(TextUtils.isEmpty(password)){
             Toast.makeText(this,"Lutfen bir sifre giriniz.",Toast.LENGTH_LONG).show();
         }else if(TextUtils.isEmpty(username)){
@@ -73,30 +67,35 @@ public class RegisterActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
 
                     if(task.isSuccessful()){
-                        updateUser();
-                        refUser.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                refUser.child("2").setValue(users);
-                            }
+                        FirebaseUser firebaseUser = auth.getCurrentUser();
+                        assert firebaseUser != null;
+                        String userid = firebaseUser.getUid();
+                        reference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                        HashMap<String,String> hashMap = new HashMap<>();
+                        hashMap.put("id",userid);
+                        hashMap.put("username",username);
+                        hashMap.put("imageURL","default");
 
+                        reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful()){
+                                    Toast.makeText(RegisterActivity.this, "My Apartment'a hosgeldiniz! Hesabiniz basarili bir sekilde olusturuldu! Lutfen giris yapiniz", Toast.LENGTH_SHORT).show();
+                                    Intent loginIntent = new Intent(RegisterActivity.this,LoginActivity.class);
+                                    startActivity(loginIntent);
+                                    finish();
+                                }else{
+                                    Toast.makeText(RegisterActivity.this, "Beklenmeyen bir hata olustu! Lutfen daha sonra tekrar deneyiniz.", Toast.LENGTH_SHORT).show();
+                                }
                             }
                         });
-                        Toast.makeText(RegisterActivity.this, "My Apartment'a hosgeldiniz! Hesabiniz basarili bir sekilde olusturuldu! Lutfen giris yapiniz", Toast.LENGTH_SHORT).show();
-                        Intent loginIntent = new Intent(RegisterActivity.this,LoginActivity.class);
-                        startActivity(loginIntent);
-                        finish();
-                    }else{
-                        Toast.makeText(RegisterActivity.this, "Beklenmeyen bir hata olustu! Lutfen daha sonra tekrar deneyiniz.", Toast.LENGTH_SHORT).show();
+
                     }
                 }
             });
         }
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
