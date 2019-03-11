@@ -7,11 +7,12 @@ import android.view.View;
 import android.widget.Button;
 
 public class WelcomeActivity extends AppCompatActivity {
-    private Button btnWelcomeLogin, btnWelcomeRegister;
+    private Button btnWelcomeLogin, btnWelcomeRegister, btnCreateApartment;
 
     public void init() {
         btnWelcomeLogin = (Button) findViewById(R.id.btnWelcomeLogin);
         btnWelcomeRegister = (Button) findViewById(R.id.btnWelcomeRegister);
+        btnCreateApartment = (Button) findViewById(R.id.btnCreateApartment);
     }
 
     @Override
@@ -37,5 +38,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 //finish();
             }
         });
+
+
     }
 }

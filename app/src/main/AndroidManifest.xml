@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".MessageActivity"></activity>
+
+        <activity
+            android:name=".ApartmentActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".MessageActivity" />
         <activity android:name=".WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,6 +40,9 @@
         <activity
             android:name=".ChatActivity"
             android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".CreateNewApartmentActivity"
+            android:parentActivityName=".ApartmentActivity" />
     </application>
 
 </manifest>

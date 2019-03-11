@@ -9,4 +9,9 @@
     <string name="password">Parola</string>
     <string name="hesap_olustur">HESAP OLUSTUR</string>
     <string name="login_account">Giris Yapiniz</string>
+    <string name="Create_Apartment">Create Apartment</string>
+    <string name="Create_new_apartment">Create New Apartment</string>
+    <string name="Apartment_name">Your Apartment Name</string>
+    <string name="City_name">City Name</string>
+    <string name="Adress">Adress</string>
 </resources>

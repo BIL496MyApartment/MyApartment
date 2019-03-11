@@ -15,6 +15,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseUser currentUser;
+    private Toolbar actionbarMain;
     private Toolbar mTopToolbar;
     private Button btnMyApartmentChat;
 
@@ -37,8 +38,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mTopToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(mTopToolbar);
+        actionbarMain = (Toolbar) findViewById(R.id.action_barMain) ;
+        setSupportActionBar(actionbarMain);
 
         Button mButton = (Button) findViewById(R.id.button3);//gunceldurumlar buttoni aktiflestirme
         mButton.setOnClickListener(new View.OnClickListener() {
@@ -54,6 +55,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intentLogin = new Intent(MainActivity.this, DiscussionActivity.class);
+                startActivity(intentLogin);
+            }
+        });
+
+        Button apartmentOperationButton = (Button) findViewById(R.id.button4);
+        apartmentOperationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentLogin = new Intent(MainActivity.this, ApartmentActivity.class);
                 startActivity(intentLogin);
             }
         });
