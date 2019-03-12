@@ -1,47 +1,70 @@
 package com.bil495calendear.bitirmeprojesi;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import android.support.annotation.NonNull;
+import android.widget.Toast;
+
 public class SurveyActivity extends AppCompatActivity {
 
-    private Button btnYes,btnNo;
-    private FirebaseDatabase database;
-    private DatabaseReference refSurvey;
-    private DatabaseReference refUser;
-    Surveys surveys;
-    Users users;
+    private Button btnYes = (Button)findViewById(R.id.YesButton);
+    private Button btnNo = (Button)findViewById(R.id.NoButton);
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private DatabaseReference refSurvey = database.getReference("Surveys");
+    Surveys surveys = new Surveys();;
+    FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+    String userID = firebaseUser.getUid();
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_survey);
-        btnYes = (Button)findViewById(R.id.YesButton);
-        btnNo = (Button)findViewById(R.id.NoButton);
-        database = FirebaseDatabase.getInstance();
-        refSurvey = database.getReference("Surveys");
-        refUser = database.getReference("Users");
-        surveys = new Surveys();
-        users = new Users();
-    }
 
-    public void YesButton(View view){
-        refSurvey.addValueEventListener(new ValueEventListener() {
+        btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                refSurvey.child("kmTv36W0CZLqIJkhomah").setValue(surveys);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+            public void onClick(View v) {
+                yesPressed();
+                Intent loginIntent = new Intent(SurveyActivity.this,MainActivity.class);
+                startActivity(loginIntent);
+                finish();
 
             }
         });
+
+        btnNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                noPressed();
+                Intent loginIntent = new Intent(SurveyActivity.this,MainActivity.class);
+                startActivity(loginIntent);
+                finish();
+            }
+        });
     }
+
+    private void yesPressed(){
+        surveys.setResponse(1);
+        surveys.setVoterID(userID);
+        surveys.setSurveyText("mantolama yapilsin mi");
+        refSurvey.setValue(surveys);
+    }
+
+    private void noPressed(){
+        surveys.setResponse(0);
+        surveys.setVoterID(userID);
+        surveys.setSurveyText("mantolama yapilsin mi");
+        refSurvey.setValue(surveys);
+    }
+
 }
