@@ -14,4 +14,6 @@
     <string name="Apartment_name">Your Apartment Name</string>
     <string name="City_name">City Name</string>
     <string name="Adress">Adress</string>
+    <string name="Join_Apartment">Join Apartment</string>
+    <string name="MyApartments">My Apartments</string>
 </resources>

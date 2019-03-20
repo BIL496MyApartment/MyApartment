@@ -10,6 +10,32 @@
         android:id="@+id/action_barApartment" />
 
     <Button
+        android:id="@+id/btnJoinApartment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Join_Apartment"
+        android:layout_below="@+id/action_barApartment"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="@color/colorPrimary"
+        android:textColor="@android:color/white" />
+
+
+    <Button
+        android:id="@+id/btnMyApartments"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/MyApartments"
+        android:layout_below="@+id/btnJoinApartment"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="@color/colorPrimary"
+        android:textColor="@android:color/white" />
+
+
+    <Button
         android:id="@+id/btnRegisterApartment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,6 +46,8 @@
         android:layout_marginLeft="10dp"
         android:background="@color/colorPrimary"
         android:textColor="@android:color/white" />
+
+
 
 
 </RelativeLayout>

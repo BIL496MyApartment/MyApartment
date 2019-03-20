@@ -110,7 +110,7 @@ public class CreateNewApartmentActivity extends AppCompatActivity {
         String key = dbRef.push().getKey();
         DatabaseReference dbRefKeyli = db.getReference("Apartments/"+key);
 
-        dbRefKeyli.setValue(new Apartment(apartmentname,cityname,adress,uid));
+        dbRefKeyli.setValue(new Apartment(apartmentname,cityname,adress,uid,key));
 
     }
 

@@ -21,26 +21,32 @@ public class Apartment {
     private String Adress;
     private String apartmentName;
 
-    public Apartment(String apartmentName,String cityName,String adress,String uid) {// create apartment
+
+    public Apartment(String apartmentName,String cityName,String adress,String uid, String apartmentID) {// create apartment
 
         this.userIDList = new ArrayList<String>();
+        this.apartmentID = apartmentID;
         this.userIDList.add(uid);
         this.apartmentName = apartmentName;
-        this.City=cityName;
         this.Adress=adress;
         this.adminID = uid;
 
     }
 
-    public Apartment(String uid){// add user for apartment
+    public Apartment(String apartmentName,String cityName,String adress,String adminID,String userid, String apartmentID){// For Updating Apartment
 
-        this.userIDList.add(uid);
+
+        this.userIDList = new ArrayList<String>();
+        this.apartmentID = apartmentID;
+        this.userIDList.add(userid);
+        this.apartmentName = apartmentName;
+        this.Adress=adress;
+        this.adminID = adminID;
+
 
     }
 
-    public Apartment(){
-
-    }
+    public Apartment(){}
 
     public List<String> getUserIDList() {
         return userIDList;

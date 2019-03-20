@@ -17,6 +17,8 @@ public class ApartmentActivity extends AppCompatActivity {
 
     private EditText txtApartmentname;
     private Button btnRegisterApartment;
+    private Button btnJoinApartment;
+    private Button btnMyApartments;
 
     FirebaseDatabase db;
 
@@ -32,8 +34,8 @@ public class ApartmentActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         btnRegisterApartment = (Button) findViewById(R.id.btnRegisterApartment);
-
-
+        btnJoinApartment = (Button) findViewById(R.id.btnJoinApartment);
+        btnMyApartments = (Button) findViewById(R.id.btnMyApartments);
 
     }
 
@@ -52,6 +54,24 @@ public class ApartmentActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intentRegister = new Intent(ApartmentActivity.this, CreateNewApartmentActivity.class);
                 startActivity(intentRegister);
+                //finish();
+            }
+        });
+
+        btnJoinApartment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentJoin = new Intent(ApartmentActivity.this, JoinApartmentActivity.class);
+                startActivity(intentJoin);
+                //finish();
+            }
+        });
+
+        btnMyApartments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentMyApartments = new Intent(ApartmentActivity.this,MyApartmentsListActivity.class);
+                startActivity(intentMyApartments);
                 //finish();
             }
         });
