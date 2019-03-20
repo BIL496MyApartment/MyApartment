@@ -57,8 +57,6 @@ public class CreateNewApartmentActivity extends AppCompatActivity {
         btnCreateApartment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 createNewApartment();
                 Toast.makeText(CreateNewApartmentActivity.this, "Apartman oluşturma işlemi başarılı olmuştur.", Toast.LENGTH_SHORT).show();
                 Intent loginIntent = new Intent(CreateNewApartmentActivity.this,ApartmentActivity.class);
