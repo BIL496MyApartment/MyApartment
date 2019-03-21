@@ -50,6 +50,13 @@ public class RegisterActivity extends AppCompatActivity {
         users = new Users();
     }
 
+    private void updateUser(){
+        users.setUserID("2");
+        users.setUsername(txtUsername.getText().toString());
+        users.setEmail(txtEmail.getText().toString());
+
+    }
+
     private void createNewAccount() {
 
         final String username = txtUsername.getText().toString();
