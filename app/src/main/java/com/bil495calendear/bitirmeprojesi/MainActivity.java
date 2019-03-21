@@ -11,6 +11,12 @@ import android.support.v7.widget.Toolbar;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar actionbarMain;
     private Toolbar mTopToolbar;
     private Button btnMyApartmentChat;
+    private static boolean isAdmin = false;
 
     public void init(){
         btnMyApartmentChat = (Button) findViewById(R.id.button2);
@@ -27,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        controlForAdmin();
         init();
         btnMyApartmentChat.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,10 +52,20 @@ public class MainActivity extends AppCompatActivity {
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentLogin = new Intent(MainActivity.this, SurveyActivity.class);
-                startActivity(intentLogin);
+
+
+                if(isAdmin == true){
+                    Intent intentLogin = new Intent(MainActivity.this, SurveyAdminActivity.class);
+                    startActivity(intentLogin);
+                }
+                else {
+                    Intent intentLogin = new Intent(MainActivity.this, SurveyActivity.class);
+                    startActivity(intentLogin);
+                }
             }
         });
+
+
 
         Button discussionButton = (Button) findViewById(R.id.button1);
         discussionButton.setOnClickListener(new View.OnClickListener() {
@@ -110,4 +127,32 @@ public class MainActivity extends AppCompatActivity {
 
         return true;
     }
+
+    private boolean controlForAdmin(){
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        Query query = ref.child("Apartments").orderByChild("adminID");//.equalTo(userID);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot issue : dataSnapshot.getChildren()) {
+                        isAdmin = true;
+                        System.out.println(":ASD:AS:DAS:DAS:D:SAD:AS:DSA:D:SAD:AS:DAS:D2 " + isAdmin);
+                        break;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        if(isAdmin){
+            return true;
+        }
+        return false;
+    }
+
 }

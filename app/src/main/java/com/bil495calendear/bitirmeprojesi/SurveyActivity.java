@@ -18,8 +18,8 @@ import android.widget.Toast;
 
 public class SurveyActivity extends AppCompatActivity {
 
-    private Button btnYes = (Button)findViewById(R.id.YesButton);
-    private Button btnNo = (Button)findViewById(R.id.NoButton);
+    private Button btnYes;
+    private Button btnNo;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference refSurvey = database.getReference("Surveys");
     Surveys surveys = new Surveys();;
@@ -30,6 +30,8 @@ public class SurveyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_survey);
+        btnYes = (Button)findViewById(R.id.YesButton);
+        btnNo = (Button)findViewById(R.id.NoButton);
 
         btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,17 +56,29 @@ public class SurveyActivity extends AppCompatActivity {
     }
 
     private void yesPressed(){
+        DatabaseReference refSurvey = FirebaseDatabase.getInstance().getReference();
+        Surveys surveys = new Surveys();
         surveys.setResponse(1);
         surveys.setVoterID(userID);
         surveys.setSurveyText("mantolama yapilsin mi");
-        refSurvey.setValue(surveys);
+        //  surveys.setSurveyID(generateSurveyID());
+        refSurvey.child("Surveys").push().setValue(surveys);
     }
 
     private void noPressed(){
+        DatabaseReference refSurvey = FirebaseDatabase.getInstance().getReference();
+        Surveys surveys = new Surveys();
         surveys.setResponse(0);
         surveys.setVoterID(userID);
         surveys.setSurveyText("mantolama yapilsin mi");
-        refSurvey.setValue(surveys);
+        // surveys.setSurveyID(generateSurveyID());
+        refSurvey.child("Surveys").push().setValue(surveys);
     }
 
+    /*private int generateSurveyID(){
+        Random r = new Random();
+        int x = r.nextInt(1000000);
+        //control id
+        return x;
+    }*/
 }

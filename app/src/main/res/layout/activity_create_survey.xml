@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreateSurveyActivity">
+
+    <include layout="@layout/actionbar_app"
+        android:id="@+id/action_barApartment" />
+
+    <TextView
+        android:id="@+id/txt_cna_ınfo1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:layout_below="@id/action_barApartment"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="40dp"
+        android:textSize="20dp"
+        android:layout_marginLeft="40dp"
+        android:text="Create New Survey"/>
+
+    <EditText
+        android:id="@+id/SurveyText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_cna_ınfo1"
+        android:hint="Enter Survey Text Here"
+        android:layout_marginTop="55dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" />
+
+    <Button
+        android:id="@+id/CreateSurveyButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="255dp"
+        android:background="@color/colorPrimary"
+        android:text="Create Survey"
+        android:textColor="@android:color/white" />
+
+</RelativeLayout>
