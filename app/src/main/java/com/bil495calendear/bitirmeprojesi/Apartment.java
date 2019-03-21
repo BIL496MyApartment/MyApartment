@@ -33,10 +33,11 @@ public class Apartment {
 
     }
 
-    public Apartment(String apartmentName,String cityName,String adress,String adminID,String userid, String apartmentID){// For Updating Apartment
+    public Apartment(String apartmentName,String cityName,String adress,List<String> userIDList,String adminID,String userid, String apartmentID){// For Updating Apartment
 
 
         this.userIDList = new ArrayList<String>();
+        this.userIDList = userIDList;
         this.apartmentID = apartmentID;
         this.userIDList.add(userid);
         this.apartmentName = apartmentName;

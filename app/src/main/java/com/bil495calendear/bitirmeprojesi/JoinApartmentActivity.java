@@ -110,7 +110,7 @@ public class JoinApartmentActivity extends AppCompatActivity {
 
                                     DatabaseReference dR = FirebaseDatabase.getInstance().getReference("Apartments").child(updateApartment.getApartmentID());
                                     Apartment newapartment = new Apartment(updateApartment.getApartmentName(),
-                                            updateApartment.getCity(),updateApartment.getAdress(),updateApartment.getAdminID(),userid, updateApartment.getApartmentID());
+                                            updateApartment.getCity(),updateApartment.getAdress(),updateApartment.getUserIDList(),updateApartment.getAdminID(),userid, updateApartment.getApartmentID());
                                     dR.setValue(newapartment);
 
 
