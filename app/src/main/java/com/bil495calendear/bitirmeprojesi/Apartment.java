@@ -30,6 +30,7 @@ public class Apartment {
         this.apartmentName = apartmentName;
         this.Adress=adress;
         this.adminID = uid;
+        this.City = cityName;
 
     }
 
@@ -41,10 +42,34 @@ public class Apartment {
         this.apartmentID = apartmentID;
         this.userIDList.add(userid);
         this.apartmentName = apartmentName;
-        this.Adress=adress;
+        this.Adress = adress;
         this.adminID = adminID;
+        this.City = cityName;
 
+    }
 
+    public Apartment(String apartmentName,String cityName,String adress,List<String> userIDList,String adminID, String apartmentID){//For remove an user from apartment
+
+        this.userIDList = new ArrayList<String>();
+        this.userIDList = userIDList;
+        this.apartmentID = apartmentID;
+        this.apartmentName = apartmentName;
+        this.Adress = adress;
+        this.adminID = adminID;
+        this.City = cityName;
+    }
+
+    public Apartment(String apartmentName,String cityName,String adress,List<String> userIDList, String apartmentID){//For remove Admin user from apartment
+
+        this.userIDList = new ArrayList<String>();
+        this.userIDList = userIDList;
+        if (userIDList.size()>0)// eger user kalmışsa adminden sonra kayıt olan ilk kişi admin olur.Eğer yoksa apartmandan bütün userlar çıkmış olur fakat verileri databasede tutulmaya devam eder.
+            this.adminID = userIDList.get(0);
+        this.apartmentID = apartmentID;
+        this.apartmentName = apartmentName;
+        this.Adress = adress;
+        this.adminID = adminID;
+        this.City = cityName;
     }
 
     public Apartment(){}

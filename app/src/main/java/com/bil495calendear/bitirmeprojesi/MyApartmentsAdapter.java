@@ -2,6 +2,8 @@
 package com.bil495calendear.bitirmeprojesi;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -15,8 +17,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 //import com.mobilhanem.androidcrudexample.R;
 
 import java.util.List;
@@ -29,6 +37,7 @@ public class MyApartmentsAdapter extends RecyclerView.Adapter<MyApartmentsAdapte
 
     List<Apartment> apartmentList;
     Context context;
+
     private ItemClickListener clickListener;
 
     public MyApartmentsAdapter(Context context, List<Apartment> apartmentList) {
@@ -94,8 +103,17 @@ public class MyApartmentsAdapter extends RecyclerView.Adapter<MyApartmentsAdapte
                                 break;
                             case R.id.delete:
                                 //delete customer
-                                //deleteCustomer(apartmentList.get(position).getApartmentID());
+                                leaveFromApartment(apartmentList.get(position).getApartmentID());
                                 break;
+                            case R.id.show_apartmentID:
+                                String s = apartmentList.get(position).getApartmentID();
+                                Intent intentRegister = new Intent(context, ShowApartmentID.class);
+                                intentRegister.putExtra("send_string",s);
+                                context.startActivity(intentRegister);
+
+
+                                break;
+
                         }
                         return false;
                     }
@@ -108,41 +126,79 @@ public class MyApartmentsAdapter extends RecyclerView.Adapter<MyApartmentsAdapte
 
     }
 
+    private DatabaseReference databaseReferenceApartments;
+    private FirebaseUser firebaseUser;
+    private String userid;
+
+    private List<String>userList;
+
     private Apartment updateApartment;
-    /*
-    private void updateCustomer(Apartment apartment) {
 
-        updateApartment = apartment;
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE);
-        final View dialogView = inflater.inflate(R.layout.update_dialog, null);
-        dialogBuilder.setView(dialogView);
+    private void leaveFromApartment(String id) {
 
-        final EditText editTextName = (EditText) dialogView.findViewById(R.id.editTextName);
-        final Spinner spinnerUpdate = (Spinner) dialogView.findViewById(R.id.spinnerUpdate);
-        final Button buttonUpdate = (Button) dialogView.findViewById(R.id.buttonUpdateCustomer);
 
-        editTextName.setText(updateCustomer.getCustomerName());
+        final String paramId =id;
 
-        dialogBuilder.setTitle("Müşteri Düzenleme");
-        final AlertDialog b = dialogBuilder.create();
-        b.show();
+        databaseReferenceApartments = FirebaseDatabase.getInstance().getReference("Apartments");
 
-        buttonUpdate.setOnClickListener(new View.OnClickListener() {
+        databaseReferenceApartments.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View v) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                if(editTextName.getText().length()>0){
+                firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                userid = firebaseUser.getUid();
 
-                    DatabaseReference dR = FirebaseDatabase.getInstance().getReference("customers").child(updateApartment.getCustomerId());
-                    Apartment apartment = new Apartment(updateApartment.getApartmentID(),editTextName.getText().toString(),spinnerUpdate.getSelectedItem().toString());
-                    dR.setValue(apartment);
-                    b.dismiss();
-                    Toast.makeText(context, "Müşteri Güncellendi", Toast.LENGTH_SHORT).show();
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    Apartment apartment = postSnapshot.getValue(Apartment.class);
+
+                    if (apartment.getApartmentID().equals(paramId)) {
+                        boolean isAdmin = false;
+                        userList = apartment.getUserIDList();
+                        updateApartment = apartment;
+                        if (!userList.isEmpty()) {
+                            for (int i = 0; i < userList.size(); i++) {
+                                if (userid.equals(userList.get(i))) {
+                                    userList.remove(i);
+                                    if(i==0){// Admin quit
+                                        isAdmin=true;
+                                        DatabaseReference dR = FirebaseDatabase.getInstance().getReference("Apartments").child(updateApartment.getApartmentID());
+                                        Apartment newapartment = new Apartment(updateApartment.getApartmentName(),
+                                                updateApartment.getCity(),updateApartment.getAdress(),updateApartment.getUserIDList(), updateApartment.getApartmentID());
+                                        dR.setValue(newapartment);
+                                        Toast.makeText(context, "Apartmandan yönetici olarak ayrıldıgınız ve yeni yönetici sizden sonra apartmana kayıt olan bir kişi hala varsa ona atanmıştır.", Toast.LENGTH_SHORT).show();
+                                    }
+
+                                }
+
+
+                            }
+                            if (isAdmin==false) {
+
+                                DatabaseReference dR = FirebaseDatabase.getInstance().getReference("Apartments").child(updateApartment.getApartmentID());
+                                Apartment newapartment = new Apartment(updateApartment.getApartmentName(),
+                                        updateApartment.getCity(),updateApartment.getAdress(),updateApartment.getUserIDList(),userList.get(0), updateApartment.getApartmentID());
+                                dR.setValue(newapartment);
+                                Toast.makeText(context, "Apartmandan kullanıcı olarak ayrıldınız.", Toast.LENGTH_SHORT).show();
+
+
+                            }
+                        }
+                    }
                 }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
+
     }
+
+
+
+
 
     private void deleteCustomer(String id) {
 
@@ -152,7 +208,7 @@ public class MyApartmentsAdapter extends RecyclerView.Adapter<MyApartmentsAdapte
         drOrders.removeValue();
         Toast.makeText(context ,"Müşteri Silindi", Toast.LENGTH_SHORT).show();
     }
-    */
+
     public void setClickListener(ItemClickListener itemClickListener) {
         this.clickListener = itemClickListener;
     }

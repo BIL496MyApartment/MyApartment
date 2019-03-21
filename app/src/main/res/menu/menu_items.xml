@@ -8,8 +8,13 @@
         app:showAsAction="ifRoom" />
 
     <item
+        android:id="@+id/show_apartmentID"
+        android:title="Show"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/delete"
-        android:title="Sil"
+        android:title="Ayrıl"
         app:showAsAction="ifRoom" />
 
     </menu>
