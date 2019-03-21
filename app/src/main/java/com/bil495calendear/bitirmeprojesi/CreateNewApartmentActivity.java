@@ -58,7 +58,7 @@ public class CreateNewApartmentActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 createNewApartment();
-                Toast.makeText(CreateNewApartmentActivity.this, "Apartman oluşturma işlemi başarılı olmuştur.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateNewApartmentActivity.this, "Apartman olusturma islemi basarili olmustur.", Toast.LENGTH_SHORT).show();
                 Intent loginIntent = new Intent(CreateNewApartmentActivity.this,ApartmentActivity.class);
                 startActivity(loginIntent);
                 finish();
@@ -86,11 +86,11 @@ public class CreateNewApartmentActivity extends AppCompatActivity {
 
 
         if(TextUtils.isEmpty(apartmentname)){
-            Toast.makeText(this,"Apartman alanı boş olamaz !",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Apartman alani bos olamaz !",Toast.LENGTH_LONG).show();
         }else if(TextUtils.isEmpty(cityname)){
-            Toast.makeText(this,"Şehir Alanı Boş olamaz !",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Sehir Alani Bos olamaz !",Toast.LENGTH_LONG).show();
         }else if (TextUtils.isEmpty(adress)){
-            Toast.makeText(this,"Adress Alanı Boş olamaz !",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Adress Alani Bos olamaz !",Toast.LENGTH_LONG).show();
         }else {
 
             registerApartment(apartmentname,cityname,adress,uid);

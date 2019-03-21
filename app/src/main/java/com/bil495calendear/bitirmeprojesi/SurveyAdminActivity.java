@@ -17,7 +17,7 @@ public class SurveyAdminActivity extends AppCompatActivity {
         viewSurveys.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentLogin = new Intent(SurveyAdminActivity.this, SurveyActivity.class);
+                Intent intentLogin = new Intent(SurveyAdminActivity.this, ViewSurveys.class);
                 startActivity(intentLogin);
 
             }

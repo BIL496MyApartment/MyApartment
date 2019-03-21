@@ -57,7 +57,7 @@ public class MyApartmentsListActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onStart() {
+        protected void onStart() {
         super.onStart();
         databaseReferenceApartments.addValueEventListener(new ValueEventListener() {
             @Override
@@ -83,8 +83,6 @@ public class MyApartmentsListActivity extends AppCompatActivity {
                         }
 
                     }
-
-
                 }
 
 

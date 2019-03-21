@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        actionbarMain = (Toolbar) findViewById(R.id.action_barMain) ;
+        actionbarMain = (Toolbar) findViewById(R.id.action_barMain);
         setSupportActionBar(actionbarMain);
 
         Button mButton = (Button) findViewById(R.id.button3);//gunceldurumlar buttoni aktiflestirme
@@ -130,14 +130,13 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean controlForAdmin(){
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        Query query = ref.child("Apartments").orderByChild("adminID");//.equalTo(userID);
+        Query query = ref.child("Apartments").orderByChild("adminID");
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot issue : dataSnapshot.getChildren()) {
                         isAdmin = true;
-                        System.out.println(":ASD:AS:DAS:DAS:D:SAD:AS:DSA:D:SAD:AS:DAS:D2 " + isAdmin);
                         break;
                     }
                 }

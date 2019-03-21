@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".CreateSurveyActivity"></activity>
+        <activity android:name=".ViewSurveys"></activity>
+        <activity android:name=".CreateSurveyActivity" />
         <activity android:name=".SurveyAdminActivity" />
         <activity
             android:name=".JoinApartmentActivity"
