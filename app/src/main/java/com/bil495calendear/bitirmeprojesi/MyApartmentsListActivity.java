@@ -29,7 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyApartmentsListActivity extends AppCompatActivity {
+public class MyApartmentsListActivity extends AppCompatActivity implements ItemClickListener {
 
 
     private DatabaseReference databaseReferenceApartments;
@@ -43,8 +43,8 @@ public class MyApartmentsListActivity extends AppCompatActivity {
 
     private List<String>userList;
 
-
-
+    public static final String APARTMENT_NAME = "apartmentname";
+    public static final String APARTMENT_ADDRESS = "Address";
 
 
     private Toolbar actionbarMyApartments;
@@ -97,7 +97,7 @@ public class MyApartmentsListActivity extends AppCompatActivity {
                 mRecyclerView.setLayoutManager(mLayoutManager);
 
                 myApartmentsAdapter = new MyApartmentsAdapter(MyApartmentsListActivity.this, apartments);
-                //myApartmentsAdapter.setClickListener(MyApartmentsListActivity.this);
+                myApartmentsAdapter.setClickListener(MyApartmentsListActivity.this);
                 mRecyclerView.setAdapter(myApartmentsAdapter);
             }
 
@@ -127,6 +127,15 @@ public class MyApartmentsListActivity extends AppCompatActivity {
 
 
 
+
+    public void onClick(View view, int position) {
+        Apartment apartment = apartments.get(position);
+
+        Intent intent = new Intent(getApplicationContext(), ApartmentDetailActivity.class);
+        intent.putExtra(APARTMENT_ADDRESS, apartment.getAdress());
+        intent.putExtra(APARTMENT_NAME, apartment.getApartmentName());
+        startActivity(intent);
+    }
 
 
 

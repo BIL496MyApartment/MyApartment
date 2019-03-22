@@ -1,9 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ApartmentDetailActivity">
 
-</android.support.constraint.ConstraintLayout>
+
+    <include layout="@layout/actionbar_app"
+        android:id="@+id/action_barDetail" />
+
+    <TextView
+        android:id="@+id/txtApart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:layout_below="@id/action_barDetail"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="40dp"
+        android:textSize="20dp"
+        android:layout_marginLeft="40dp"
+        android:text="Apartment Name :"
+        />
+    <TextView
+        android:id="@+id/txtApartmentName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:layout_below="@id/txtApart"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="40dp"
+        android:textSize="20dp"
+        android:layout_marginLeft="40dp"
+        />
+
+    <TextView
+        android:id="@+id/txtAdresname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:layout_below="@id/txtApartmentName"
+        android:layout_marginTop="100dp"
+        android:layout_marginStart="40dp"
+        android:textSize="20dp"
+        android:layout_marginLeft="40dp"
+        android:text="Apartment Adress :"
+        />
+    <TextView
+        android:id="@+id/txtApartmentAdress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:layout_below="@id/txtAdresname"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="40dp"
+        android:textSize="20dp"
+        android:layout_marginLeft="40dp"
+        />
+
+
+</RelativeLayout>
