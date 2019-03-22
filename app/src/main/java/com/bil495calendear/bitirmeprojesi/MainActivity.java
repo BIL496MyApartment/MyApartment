@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         discussionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentLogin = new Intent(MainActivity.this, DiscussionActivity.class);
+                Intent intentLogin = new Intent(MainActivity.this, DiscussionPageActivity.class);
                 startActivity(intentLogin);
             }
         });
