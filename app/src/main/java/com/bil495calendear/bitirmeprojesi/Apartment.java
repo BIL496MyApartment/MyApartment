@@ -38,6 +38,9 @@ public class Apartment {
 
 
         this.userIDList = new ArrayList<String>();
+        if (userIDList.get(0).equals("0")){
+            userIDList.remove(0);
+        }
         this.userIDList = userIDList;
         this.apartmentID = apartmentID;
         this.userIDList.add(userid);
@@ -63,14 +66,19 @@ public class Apartment {
 
         this.userIDList = new ArrayList<String>();
         this.userIDList = userIDList;
+        this.userIDList.add("0");
         if (userIDList.size()>0)// eger user kalmışsa adminden sonra kayıt olan ilk kişi admin olur.Eğer yoksa apartmandan bütün userlar çıkmış olur fakat verileri databasede tutulmaya devam eder.
             this.adminID = userIDList.get(0);
+        else
+            this.adminID="";
         this.apartmentID = apartmentID;
         this.apartmentName = apartmentName;
         this.Adress = adress;
-        this.adminID = adminID;
         this.City = cityName;
     }
+
+
+
 
     public Apartment(){}
 

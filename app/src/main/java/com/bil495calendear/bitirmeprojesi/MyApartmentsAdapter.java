@@ -25,13 +25,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-//import com.mobilhanem.androidcrudexample.R;
+
 
 import java.util.List;
-
-/**
- * Created by alper on 23/04/2017.
- */
 
 public class MyApartmentsAdapter extends RecyclerView.Adapter<MyApartmentsAdapter.ViewHolder> {
 

@@ -95,7 +95,7 @@ public class JoinApartmentActivity extends AppCompatActivity {
                             countforcode++;
                             userList = apartment.getUserIDList();
                             updateApartment = apartment;
-                            if (!userList.isEmpty()) {
+                            if (!userList.get(0).equals("0")) {
                                 int count = 0;
                                 for (int i = 0; i < userList.size(); i++) {
                                     if (userid.equals(userList.get(i))) {
