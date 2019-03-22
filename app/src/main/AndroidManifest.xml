@@ -9,8 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".ShowApartmentID"
-            android:parentActivityName=".MyApartmentsListActivity"></activity>
+        <activity android:name=".ApartmentDetailActivity"></activity>
+        <activity
+            android:name=".ShowApartmentID"
+            android:parentActivityName=".MyApartmentsListActivity" />
         <activity android:name=".ViewSurveys" />
         <activity android:name=".CreateSurveyActivity" />
         <activity android:name=".SurveyAdminActivity" />

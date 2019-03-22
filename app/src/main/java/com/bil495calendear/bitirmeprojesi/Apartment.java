@@ -25,6 +25,7 @@ public class Apartment {
     public Apartment(String apartmentName,String cityName,String adress,String uid, String apartmentID) {// create apartment
 
         this.userIDList = new ArrayList<String>();
+        this.userIDList.add("First");
         this.apartmentID = apartmentID;
         this.userIDList.add(uid);
         this.apartmentName = apartmentName;
@@ -38,9 +39,6 @@ public class Apartment {
 
 
         this.userIDList = new ArrayList<String>();
-        if (userIDList.get(0).equals("0")){
-            userIDList.remove(0);
-        }
         this.userIDList = userIDList;
         this.apartmentID = apartmentID;
         this.userIDList.add(userid);
@@ -66,9 +64,9 @@ public class Apartment {
 
         this.userIDList = new ArrayList<String>();
         this.userIDList = userIDList;
-        this.userIDList.add("0");
-        if (userIDList.size()>0)// eger user kalmışsa adminden sonra kayıt olan ilk kişi admin olur.Eğer yoksa apartmandan bütün userlar çıkmış olur fakat verileri databasede tutulmaya devam eder.
-            this.adminID = userIDList.get(0);
+        // eger user kalmışsa adminden sonra kayıt olan ilk kişi admin olur.Eğer yoksa apartmandan bütün userlar çıkmış olur fakat verileri databasede tutulmaya d
+        if (userIDList.size()>1)
+            this.adminID = userIDList.get(1);
         else
             this.adminID="";
         this.apartmentID = apartmentID;
@@ -76,9 +74,6 @@ public class Apartment {
         this.Adress = adress;
         this.City = cityName;
     }
-
-
-
 
     public Apartment(){}
 

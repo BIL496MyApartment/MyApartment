@@ -88,6 +88,7 @@ public class JoinApartmentActivity extends AppCompatActivity {
                     firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
                     userid = firebaseUser.getUid();
                     int countforcode = 0;
+                    int count = 0;
                     for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                         Apartment apartment = postSnapshot.getValue(Apartment.class);
 
@@ -95,13 +96,11 @@ public class JoinApartmentActivity extends AppCompatActivity {
                             countforcode++;
                             userList = apartment.getUserIDList();
                             updateApartment = apartment;
-                            if (!userList.get(0).equals("0")) {
-                                int count = 0;
+                            if (userList.size()>0) {
+
                                 for (int i = 0; i < userList.size(); i++) {
                                     if (userid.equals(userList.get(i))) {
                                         count++;
-
-
                                     }
 
                                     //System.out.println("İndis:"+i+" Değer:"+userList.get(i));
@@ -110,26 +109,23 @@ public class JoinApartmentActivity extends AppCompatActivity {
 
                                     DatabaseReference dR = FirebaseDatabase.getInstance().getReference("Apartments").child(updateApartment.getApartmentID());
                                     Apartment newapartment = new Apartment(updateApartment.getApartmentName(),
-                                            updateApartment.getCity(),updateApartment.getAdress(),updateApartment.getUserIDList(),updateApartment.getAdminID(),userid, updateApartment.getApartmentID());
+                                            updateApartment.getCity(),updateApartment.getAdress(),userList,updateApartment.getAdminID(),userid, updateApartment.getApartmentID());
                                     dR.setValue(newapartment);
-
+                                    //System.out.println("c=0");
 
                                     //apartment.getUserIDList().add(userid);
                                 }
-                            } else {
 
-                                DatabaseReference dR = FirebaseDatabase.getInstance().getReference("Apartments").child(updateApartment.getApartmentID());
-                                Apartment newapartment = new Apartment(updateApartment.getApartmentName(),
-                                        updateApartment.getCity(),updateApartment.getAdress(),userid, updateApartment.getApartmentID());
-                                dR.setValue(newapartment);
-
-                                //apartment.setAdminID(userid);
-                                //apartment.getUserIDList().add(userid);
                             }
                         }
                     }
 
-                    if (countforcode > 0) {
+
+                    if(count>0){
+                        Toast.makeText(JoinApartmentActivity.this, "Aynı apartmana birdeb fazla kayıt olamazsınız", Toast.LENGTH_SHORT).show();
+
+                    }
+                    else if (countforcode > 0) {
                         sonuc = true;
                         Toast.makeText(JoinApartmentActivity.this, "Apartmana kayıt işlemi başarılı olmuştur.", Toast.LENGTH_SHORT).show();
                     } else

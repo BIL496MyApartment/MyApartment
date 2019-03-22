@@ -26,7 +26,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-
 import java.util.List;
 
 public class MyApartmentsAdapter extends RecyclerView.Adapter<MyApartmentsAdapter.ViewHolder> {
@@ -151,19 +150,31 @@ public class MyApartmentsAdapter extends RecyclerView.Adapter<MyApartmentsAdapte
                         boolean isAdmin = false;
                         userList = apartment.getUserIDList();
                         updateApartment = apartment;
-                        if (!userList.isEmpty()) {
+                        if (!(userList.size()==1)) {
                             for (int i = 0; i < userList.size(); i++) {
                                 if (userid.equals(userList.get(i))) {
                                     userList.remove(i);
-                                    if(i==0){// Admin quit
+                                    if(userList.size()==1){
+
                                         isAdmin=true;
                                         DatabaseReference dR = FirebaseDatabase.getInstance().getReference("Apartments").child(updateApartment.getApartmentID());
                                         Apartment newapartment = new Apartment(updateApartment.getApartmentName(),
                                                 updateApartment.getCity(),updateApartment.getAdress(),updateApartment.getUserIDList(), updateApartment.getApartmentID());
                                         dR.setValue(newapartment);
                                         Toast.makeText(context, "Apartmandan yönetici olarak ayrıldıgınız ve yeni yönetici sizden sonra apartmana kayıt olan bir kişi hala varsa ona atanmıştır.", Toast.LENGTH_SHORT).show();
-                                    }
 
+
+                                    }else {
+
+                                        if (i == 1) {// Admin quit
+                                            isAdmin = true;
+                                            DatabaseReference dR = FirebaseDatabase.getInstance().getReference("Apartments").child(updateApartment.getApartmentID());
+                                            Apartment newapartment = new Apartment(updateApartment.getApartmentName(),
+                                                    updateApartment.getCity(), updateApartment.getAdress(), updateApartment.getUserIDList(), updateApartment.getApartmentID());
+                                            dR.setValue(newapartment);
+                                            Toast.makeText(context, "Apartmandan yönetici olarak ayrıldıgınız ve yeni yönetici sizden sonra apartmana kayıt olan bir kişi hala varsa ona atanmıştır.", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
                                 }
 
 
@@ -178,6 +189,8 @@ public class MyApartmentsAdapter extends RecyclerView.Adapter<MyApartmentsAdapte
 
 
                             }
+                        }else{
+
                         }
                     }
                 }
@@ -191,6 +204,7 @@ public class MyApartmentsAdapter extends RecyclerView.Adapter<MyApartmentsAdapte
         });
 
     }
+
 
 
 
