@@ -9,8 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".ApartmentDetailActivity"
-            android:parentActivityName=".MyApartmentsListActivity"></activity>
+        <activity
+            android:name=".ApartmentDetailActivity"
+            android:parentActivityName=".MyApartmentsListActivity" />
         <activity
             android:name=".ShowApartmentID"
             android:parentActivityName=".MyApartmentsListActivity" />
@@ -56,6 +57,9 @@
         <activity
             android:name=".CreateNewApartmentActivity"
             android:parentActivityName=".ApartmentActivity" />
+        <activity android:name=".DiscussionPageActivity" />
+        <activity android:name=".ViewTopicActivity" />
+        <activity android:name=".CreateTopicActivity"></activity>
     </application>
 
 </manifest>
