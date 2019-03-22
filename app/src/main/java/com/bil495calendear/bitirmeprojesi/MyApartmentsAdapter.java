@@ -93,11 +93,9 @@ public class MyApartmentsAdapter extends RecyclerView.Adapter<MyApartmentsAdapte
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.edit:
-                                //update customer
-                                //updateCustomer(apartmentList.get(position));
+                                updateApartmentVal(apartmentList.get(position));
                                 break;
                             case R.id.delete:
-                                //delete customer
                                 leaveFromApartment(apartmentList.get(position).getApartmentID());
                                 break;
                             case R.id.show_apartmentID:
@@ -205,18 +203,50 @@ public class MyApartmentsAdapter extends RecyclerView.Adapter<MyApartmentsAdapte
 
     }
 
+    private Apartment updateApartmentVal;
+    private void updateApartmentVal(Apartment apartment) {
+
+        updateApartmentVal = apartment;
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE);
+        final View dialogView = inflater.inflate(R.layout.update_dialog, null);
+        dialogBuilder.setView(dialogView);
+
+        final EditText editTextName = (EditText) dialogView.findViewById(R.id.editTextName);
+        final EditText editTextAddress = (EditText) dialogView.findViewById(R.id.editTextAdmName);
+        final Button buttonUpdate = (Button) dialogView.findViewById(R.id.buttonUpdateCustomer);
+
+        editTextName.setText(updateApartmentVal.getApartmentName());
+        editTextAddress.setText(updateApartmentVal.getAdress());
+
+        dialogBuilder.setTitle("Apartment Set Name And Address");
+        final AlertDialog b = dialogBuilder.create();
+        b.show();
+
+        buttonUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(editTextName.getText().length()>0 & editTextAddress.getText().length()>0 ){
+
+                    DatabaseReference dR = FirebaseDatabase.getInstance().getReference("Apartments").child(updateApartmentVal.getApartmentID());
+                    Apartment apartment = new Apartment(updateApartmentVal.getUserIDList(),editTextName.getText().toString(),updateApartmentVal.getCity(),editTextAddress.getText().toString(),updateApartmentVal.getAdminID(),updateApartmentVal.getApartmentID());
+                    dR.setValue(apartment);
+                    b.dismiss();
+                    Toast.makeText(context, "Apartment Updated", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
 
 
 
 
+    private void deleteApartment(String id) {
 
-    private void deleteCustomer(String id) {
-
-        DatabaseReference dR = FirebaseDatabase.getInstance().getReference("customers").child(id);
+        DatabaseReference dR = FirebaseDatabase.getInstance().getReference("Apartments").child(id);
         dR.removeValue();
-        DatabaseReference drOrders = FirebaseDatabase.getInstance().getReference("orders").child(id);
-        drOrders.removeValue();
-        Toast.makeText(context ,"Müşteri Silindi", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context ,"Apartment Deleted", Toast.LENGTH_SHORT).show();
     }
 
     public void setClickListener(ItemClickListener itemClickListener) {

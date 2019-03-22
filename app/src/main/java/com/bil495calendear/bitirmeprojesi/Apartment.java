@@ -48,6 +48,19 @@ public class Apartment {
         this.City = cityName;
 
     }
+    public Apartment(List<String> userIDList,String apartmentName,String cityName,String adress,String adminID, String apartmentID){//update values for popup
+
+        this.userIDList = new ArrayList<String>();
+        this.userIDList = userIDList;
+        this.apartmentID = apartmentID;
+        this.apartmentName = apartmentName;
+        this.Adress = adress;
+        this.adminID = adminID;
+        this.City = cityName;
+
+
+
+    }
 
     public Apartment(String apartmentName,String cityName,String adress,List<String> userIDList,String adminID, String apartmentID){//For remove an user from apartment
 
