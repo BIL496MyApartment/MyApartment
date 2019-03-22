@@ -20,12 +20,12 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
-    private FirebaseUser currentUser;
+    private FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
     private Toolbar actionbarMain;
     private Toolbar mTopToolbar;
     private Button btnMyApartmentChat;
     private static boolean isAdmin = false;
-
+    String userID  = currentUser.getUid();
     public void init(){
         btnMyApartmentChat = (Button) findViewById(R.id.button2);
     }
@@ -136,8 +136,11 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot issue : dataSnapshot.getChildren()) {
-                        isAdmin = true;
-                        break;
+                        Apartment apartment = issue.getValue(Apartment.class);
+                        if(apartment.getAdminID().equals(userID)) {
+                            isAdmin = true;
+                            break;
+                        }
                     }
                 }
             }
