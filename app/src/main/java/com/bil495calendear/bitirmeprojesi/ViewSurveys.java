@@ -1,5 +1,6 @@
 package com.bil495calendear.bitirmeprojesi;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ViewSurveys extends AppCompatActivity {
-    private DatabaseReference databaseReferenceApartments;
+    private DatabaseReference databaseReferenceSurveys;
     private FirebaseUser firebaseUser;
     public List<Surveys> surveys;
     LinearLayout linearLayout;
@@ -31,7 +32,7 @@ public class ViewSurveys extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        databaseReferenceApartments.addValueEventListener(new ValueEventListener() {
+        databaseReferenceSurveys.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 linearLayout = null;
@@ -51,8 +52,13 @@ public class ViewSurveys extends AppCompatActivity {
                     textView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            SurveyActivity sa = new SurveyActivity(id);
-                            Toast.makeText(ViewSurveys.this, "sasasa", Toast.LENGTH_LONG).show();
+                            DatabaseReference db = FirebaseDatabase.getInstance().getReference("SurveyID");
+                            SurveyID s = new SurveyID();
+                            s.setSurveyID(id);
+                            db.setValue(s);
+                            Intent intentLogin = new Intent(ViewSurveys.this, SurveyActivity.class);
+                            startActivity(intentLogin);
+                            //Toast.makeText(ViewSurveys.this, "sasasa", Toast.LENGTH_LONG).show();
                         }
                     });
 
@@ -77,7 +83,7 @@ public class ViewSurveys extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_surveys);
-        databaseReferenceApartments = FirebaseDatabase.getInstance().getReference("Surveys");
+        databaseReferenceSurveys = FirebaseDatabase.getInstance().getReference("Surveys");
         surveys = new ArrayList<>();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 

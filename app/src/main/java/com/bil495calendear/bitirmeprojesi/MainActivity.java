@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    private boolean controlForAdmin(){
+    public boolean controlForAdmin(){
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         Query query = ref.child("Apartments").orderByChild("adminID");
         query.addListenerForSingleValueEvent(new ValueEventListener() {

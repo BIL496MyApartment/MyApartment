@@ -29,7 +29,7 @@ public class SurveyActivity extends AppCompatActivity {
     Surveys surveys = new Surveys();;
     FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
     String userID = firebaseUser.getUid();
-    String surveyID;
+    String surveyID = "";
 
     public SurveyActivity(){
 
@@ -69,15 +69,15 @@ public class SurveyActivity extends AppCompatActivity {
     }
 
     private void yesPressed(){
-        DatabaseReference refSurvey = FirebaseDatabase.getInstance().getReference();
-        Surveys surveys = new Surveys();
-        Query query = refSurvey.child("Surveys").orderByChild("surveyID");
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        Query query2 = ref.child("SurveyID");
+        query2.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot issue : dataSnapshot.getChildren()) {
-
+                        SurveyID sur = (SurveyID) issue.getValue(SurveyID.class);
+                        surveyID = sur.getSurveyID();
                     }
                 }
             }
@@ -87,22 +87,28 @@ public class SurveyActivity extends AppCompatActivity {
 
             }
         });
-        //surveys.setResponse(1);
-        //surveys.setVoterID(userID);
-        surveys.setSurveyText("mantolama yapilsin mi");
-        //  surveys.setSurveyID(generateSurveyID());
-        refSurvey.child("Surveys").push().setValue(surveys);
-    }
-
-    private void noPressed(){
         DatabaseReference refSurvey = FirebaseDatabase.getInstance().getReference();
-        Query query = refSurvey.child("Surveys").orderByChild("surveyID");
-        /*query.addListenerForSingleValueEvent(new ValueEventListener() {
+        Surveys surveys = new Surveys();
+        final Query query = refSurvey.child("Surveys").orderByChild("surveyID");
+        final List<Integer> responseList = new ArrayList<>();
+        final List<String> voterIDs = new ArrayList<>();
+        final String[] text = new String[1];
+        System.out.println("AS:DA:SDA:SD:SA:DSA:DSA " + surveyID);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot issue : dataSnapshot.getChildren()) {
-                        break;
+                        Surveys s = dataSnapshot.getValue(Surveys.class);
+                        if(surveyID.equals(s.getSurveyID())) {
+                            for (int i = 0; i < s.getResponse().size(); i++) {
+                                responseList.add(s.getResponse().get(i));
+                            }
+                            for (int i = 0; i < s.getVoterID().size(); i++) {
+                                voterIDs.add(s.getVoterID().get(i));
+                            }
+                            text[0] =s.getSurveyText();
+                        }
                     }
                 }
             }
@@ -111,7 +117,30 @@ public class SurveyActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });*/
+        });
+        responseList.add(1);
+        boolean isAvailable = true;
+        for (int i= 0; i < voterIDs.size(); i++){
+            if(voterIDs.get(i).equals(userID)){
+                isAvailable = false;
+            }
+        }
+
+        if(isAvailable){
+            voterIDs.add(userID);
+        }
+        else{
+            return;
+        }
+
+        surveys.setSurveyText(text[0]);
+        surveys.setSurveyID(surveyID);
+        refSurvey.child("Surveys").push().setValue(surveys);
+    }
+
+    private void noPressed(){
+        DatabaseReference refSurvey = FirebaseDatabase.getInstance().getReference();
+        Query query = refSurvey.child("Surveys").orderByChild("surveyID");
 
         String key = refSurvey.push().getKey();
         DatabaseReference refSurveyKeyli = database.getReference("Surveys/"+key);
@@ -127,10 +156,4 @@ public class SurveyActivity extends AppCompatActivity {
         refSurveyKeyli.setValue(surveys);
     }
 
-    /*private int generateSurveyID(){
-        Random r = new Random();
-        int x = r.nextInt(1000000);
-        //control id
-        return x;
-    }*/
 }
