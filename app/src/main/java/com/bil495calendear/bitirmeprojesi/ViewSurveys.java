@@ -4,6 +4,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -18,11 +24,9 @@ import java.util.List;
 
 public class ViewSurveys extends AppCompatActivity {
     private DatabaseReference databaseReferenceApartments;
-
     private FirebaseUser firebaseUser;
-
-    private List<Surveys> surveys;
-    private RecyclerView myRecyclerView;
+    public List<Surveys> surveys;
+    LinearLayout linearLayout;
 
     @Override
     protected void onStart() {
@@ -30,24 +34,34 @@ public class ViewSurveys extends AppCompatActivity {
         databaseReferenceApartments.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
+                linearLayout = null;
                 surveys.clear();
                 firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Surveys survey = postSnapshot.getValue(Surveys.class);
                     surveys.add(survey);
                 }
+                linearLayout = (LinearLayout) findViewById(R.id.linear_layout);
+
+                for (int i = 0; i < surveys.size(); i++) {
+                    TextView textView = new TextView(ViewSurveys.this);
+                    textView.setText(surveys.get(i).getSurveyText() + "\n\n");
+                    textView.setBackgroundResource(R.drawable.textview_border);
+                    textView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(ViewSurveys.this, "sasasa", Toast.LENGTH_LONG).show();
+                        }
+                    });
 
 
-              /*  myRecyclerView.setHasFixedSize(true);
+                    linearLayout.addView(textView);
 
-                // use a linear layout manager
-                mLayoutManager = new LinearLayoutManager(MyApartmentsListActivity.this);
-                myRecyclerView.setLayoutManager(mLayoutManager);
+                }
 
-                myApartmentsAdapter = new MyApartmentsAdapter(MyApartmentsListActivity.this, apartments);
-                //myApartmentsAdapter.setClickListener(MyApartmentsListActivity.this);
-                mRecyclerView.setAdapter(myApartmentsAdapter);*/
+
+
+
             }
 
             @Override
@@ -61,12 +75,10 @@ public class ViewSurveys extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_surveys);
-
-        myRecyclerView = (RecyclerView) findViewById(R.id.viewSurveys);
-
         databaseReferenceApartments = FirebaseDatabase.getInstance().getReference("Surveys");
-
         surveys = new ArrayList<>();
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
     }
 
 }
