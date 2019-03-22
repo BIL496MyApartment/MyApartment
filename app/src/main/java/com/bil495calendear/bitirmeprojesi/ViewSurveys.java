@@ -47,9 +47,11 @@ public class ViewSurveys extends AppCompatActivity {
                     TextView textView = new TextView(ViewSurveys.this);
                     textView.setText(surveys.get(i).getSurveyText() + "\n\n");
                     textView.setBackgroundResource(R.drawable.textview_border);
+                    final String id = surveys.get(i).getSurveyID();
                     textView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            SurveyActivity sa = new SurveyActivity(id);
                             Toast.makeText(ViewSurveys.this, "sasasa", Toast.LENGTH_LONG).show();
                         }
                     });

@@ -1,28 +1,38 @@
 package com.bil495calendear.bitirmeprojesi;
 
-public class Surveys {
-    private int Response;
-    private String SurveyText;
-    private String VoterID;
-    private int SurveyID;
+import java.util.List;
 
+public class Surveys {
+
+    private String SurveyText;
+    private String SurveyID;
+    private List<Integer> Response;
+    private List<String> VoterID;
     public Surveys(){
 
     }
 
-    public Surveys(int response, String surveyText, String voterID,int surveyID) {
+    public Surveys(List<Integer> response, String surveyText, List<String> voterID,String surveyID) {
         Response = response;
         SurveyText = surveyText;
         VoterID = voterID;
         SurveyID = surveyID;
     }
 
-    public int getResponse() {
+    public List<Integer> getResponse() {
         return Response;
     }
 
-    public void setResponse(int response) {
+    public void setResponse(List<Integer> response) {
         Response = response;
+    }
+
+    public List<String> getVoterID() {
+        return VoterID;
+    }
+
+    public void setVoterID(List<String> voterID) {
+        VoterID = voterID;
     }
 
     public String getSurveyText() {
@@ -33,19 +43,12 @@ public class Surveys {
         SurveyText = surveyText;
     }
 
-    public String getVoterID() {
-        return VoterID;
-    }
-
-    public int getSurveyID() {
+    public String getSurveyID() {
         return SurveyID;
     }
 
-    public void setSurveyID(int surveyID) {
+    public void setSurveyID(String surveyID) {
         SurveyID = surveyID;
     }
 
-    public void setVoterID(String voterID) {
-        VoterID = voterID;
-    }
 }
