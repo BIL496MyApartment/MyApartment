@@ -2,6 +2,7 @@ package com.bil495calendear.bitirmeprojesi;
 
 
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -57,6 +58,42 @@ public class FriendsFragment extends Fragment {
 
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
+        DatabaseReference aptRef = FirebaseDatabase.getInstance().getReference("Apartments");
+
+        /*aptRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                mUsers.clear();
+                User aptAdmin = new User();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    Apartment apartment = snapshot.getValue(Apartment.class);
+                    List ap = new ArrayList<>();
+                    ap = apartment.getUserIDList();
+                    aptAdmin.setId(apartment.getAdminID());
+                    aptAdmin.setImageURL("default");
+                    aptAdmin.setUsername(getUsername(apartment.getAdminID()));
+
+                    mUsers.add(aptAdmin);
+
+                    for(int i = 1 ; i<ap.size();i++){
+                        if (!ap.get(i).equals(firebaseUser.getUid())){
+                            if(!mUsers.contains(getUser((String)ap.get(i))))
+                                mUsers.add(getUser((String)ap.get(i)));
+
+                        }
+                    }
+
+                }
+                friendAdapter = new FriendAdapter(getContext(),mUsers);
+                recyclerView.setAdapter(friendAdapter);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });*/
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -83,5 +120,55 @@ public class FriendsFragment extends Fragment {
             }
         });
     }
+   /* private static String getUsername(final String userid){
+        final User[] toRet = new User[1];
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
 
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot: dataSnapshot.getChildren()){
+                    User user = snapshot.getValue(User.class);
+                    assert user != null;
+                    if (userid.equals(user.getId())){
+                        toRet[0] = new User(userid,user.getUsername(),user.getImageURL());
+                        break;
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        return toRet[0].getUsername();
+    }
+    private static User getUser(final String userid){
+        final User[] toRet = new User[1];
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot: dataSnapshot.getChildren()){
+                    User user = snapshot.getValue(User.class);
+                    assert user != null;
+                    if (userid.equals(user.getId())){
+                        toRet[0] = new User(userid,user.getUsername(),user.getImageURL());
+                        break;
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        return toRet[0];
+    }
+*/
 }

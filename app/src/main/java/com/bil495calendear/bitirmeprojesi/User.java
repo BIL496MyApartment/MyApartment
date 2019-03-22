@@ -29,4 +29,16 @@ public class User {
     public String getImageURL() {
         return imageURL;
     }
+
+    public void setId(String id){
+        this.id = id;
+
+    }
+    public void setUsername(String username){
+        this.username=username;
+    }
+    public void setImageURL(String imageURL){
+        this.imageURL= imageURL;
+
+    }
 }

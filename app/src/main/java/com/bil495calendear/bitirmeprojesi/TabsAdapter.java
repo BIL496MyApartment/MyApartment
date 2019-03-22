@@ -17,12 +17,9 @@ public class TabsAdapter extends FragmentPagerAdapter {
         switch (position){
 
             case 0 : // istekler tab i
-                RequestFragment requestFragment = new RequestFragment();
-                return requestFragment;
-            case 1 : // sohbetler
                 ChatsFragment chatsFragment = new ChatsFragment();
                 return chatsFragment;
-            case 2 : // arkadaslar
+            case 1 : // sohbetler
                 FriendsFragment friendsFragment = new FriendsFragment();
                 return friendsFragment;
             default:
@@ -35,7 +32,7 @@ public class TabsAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 2;
     }
 
     @Nullable
@@ -43,10 +40,8 @@ public class TabsAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position){
             case 0:
-                return "ISTEKLER";
-            case 1:
                 return "SOHBETLER";
-            case 2:
+            case 1:
                 return "ARKADASLAR";
             default:
                 return null;
