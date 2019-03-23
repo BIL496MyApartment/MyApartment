@@ -30,9 +30,7 @@ public class SurveyActivity extends AppCompatActivity {
     String userID = firebaseUser.getUid();
     static String surveyID = "";
     static String text = "";
-
-    /////////////////////////edit text olustur adini degistir
-
+    TextView tv;
 
     DatabaseReference ref;
     static List<Integer> responseList = new ArrayList<>();
@@ -53,7 +51,7 @@ public class SurveyActivity extends AppCompatActivity {
         btnYes = (Button)findViewById(R.id.YesButton);
         btnNo = (Button)findViewById(R.id.NoButton);
         ref = FirebaseDatabase.getInstance().getReference("SurveyID");
-
+        tv = (TextView)findViewById(R.id.textView);
         btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -175,6 +173,12 @@ public class SurveyActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        tv.setText(text);
     }
 
 }
