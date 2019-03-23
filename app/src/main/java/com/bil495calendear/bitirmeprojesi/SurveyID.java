@@ -1,6 +1,7 @@
 package com.bil495calendear.bitirmeprojesi;
 
 public class SurveyID {
+
     private String surveyID;
 
     public SurveyID() {

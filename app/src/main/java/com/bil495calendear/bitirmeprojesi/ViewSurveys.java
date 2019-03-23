@@ -52,13 +52,9 @@ public class ViewSurveys extends AppCompatActivity {
                     textView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            DatabaseReference db = FirebaseDatabase.getInstance().getReference("SurveyID");
-                            SurveyID s = new SurveyID();
-                            s.setSurveyID(id);
-                            db.setValue(s);
+                            SurveyActivity.surveyID = id;
                             Intent intentLogin = new Intent(ViewSurveys.this, SurveyActivity.class);
                             startActivity(intentLogin);
-                            //Toast.makeText(ViewSurveys.this, "sasasa", Toast.LENGTH_LONG).show();
                         }
                     });
 
