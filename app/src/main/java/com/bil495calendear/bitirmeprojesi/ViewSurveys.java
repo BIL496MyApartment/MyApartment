@@ -32,6 +32,8 @@ public class ViewSurveys extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        linearLayout = null;
+        surveys.clear();
         databaseReferenceSurveys.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -72,7 +74,8 @@ public class ViewSurveys extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                linearLayout = null;
+                surveys.clear();
             }
         });
     }
@@ -84,7 +87,6 @@ public class ViewSurveys extends AppCompatActivity {
         databaseReferenceSurveys = FirebaseDatabase.getInstance().getReference("Surveys");
         surveys = new ArrayList<>();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-
     }
 
 }

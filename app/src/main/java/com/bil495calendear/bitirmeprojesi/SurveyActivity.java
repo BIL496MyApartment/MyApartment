@@ -31,10 +31,12 @@ public class SurveyActivity extends AppCompatActivity {
     static String surveyID = "";
     static String text = "";
     TextView tv;
-
+    TextView results;
     DatabaseReference ref;
     static List<Integer> responseList = new ArrayList<>();
     static List<String> voterIDs = new ArrayList<>();
+    int countYes = 0;
+    int countNo = 0;
 
     public SurveyActivity(){
 
@@ -52,6 +54,7 @@ public class SurveyActivity extends AppCompatActivity {
         btnNo = (Button)findViewById(R.id.NoButton);
         ref = FirebaseDatabase.getInstance().getReference("SurveyID");
         tv = (TextView)findViewById(R.id.textView);
+        results = (TextView)findViewById(R.id.results);
         btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -179,6 +182,36 @@ public class SurveyActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         tv.setText(text);
+        DatabaseReference refSurvey = FirebaseDatabase.getInstance().getReference();
+        Surveys surveys = new Surveys();
+        final Query query = refSurvey.child("Surveys").orderByChild("surveyID");
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot issue : dataSnapshot.getChildren()) {
+                        Surveys s = issue.getValue(Surveys.class);
+                        if(surveyID.equals(issue.getKey())) {
+                            for (int i = 0; i < s.getResponse().size(); i++) {
+                                if (s.getResponse().get(i) == 1) {
+                                    countYes++;
+                                } else if (s.getResponse().get(i) == 0) {
+                                    countNo++;
+                                }
+                            }
+                        }
+                    }
+                }
+                results.setText("Evet sayisi : "  + countYes + "\nHayir sayisi : " + countNo);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+
     }
 
 }
