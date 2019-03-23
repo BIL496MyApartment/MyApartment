@@ -49,9 +49,11 @@ public class ViewSurveys extends AppCompatActivity {
                     textView.setText(surveys.get(i).getSurveyText() + "\n\n");
                     textView.setBackgroundResource(R.drawable.textview_border);
                     final String id = surveys.get(i).getSurveyID();
+                    final String txt = surveys.get(i).getSurveyText();
                     textView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            SurveyActivity.text = txt;
                             SurveyActivity.surveyID = id;
                             Intent intentLogin = new Intent(ViewSurveys.this, SurveyActivity.class);
                             startActivity(intentLogin);

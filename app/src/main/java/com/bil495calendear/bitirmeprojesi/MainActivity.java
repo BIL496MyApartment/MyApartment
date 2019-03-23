@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intentLogin);
                 }
                 else {
-                    Intent intentLogin = new Intent(MainActivity.this, SurveyActivity.class);
+                    Intent intentLogin = new Intent(MainActivity.this, ViewSurveys.class);
                     startActivity(intentLogin);
                 }
             }
